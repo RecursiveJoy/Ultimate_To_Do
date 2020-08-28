@@ -12,5 +12,5 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Gradlew_test
-        run: ./gradlew test
+      - name: Maven_test
+        run: ./mvnw test
