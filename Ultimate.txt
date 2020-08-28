@@ -1,0 +1,155 @@
+Default view: The Day Planner
+Click a button on the planner to edit it.
+
+#some of this will be in the constructor, some of this will be in a script.
+planDay(day)
+
+#set the date
+* importDate()
+	date Today = new Date();
+	day.setDate(Today)
+
+
+# enter how much sleep you got in hours.
+getSleep(day)
+    sleepHours = input
+    day.setSleep( sleepHours)
+
+# Import appointments from Google calendar, remind user.
+getAppointments(day, whatever comes from google calendar)
+    while(appointments in today from calendar)    
+        day.ApptList.append(import first appointment)
+        i++
+# What is the most important task for you to finish today? Move this to the To-Do list #1
+getMostImportantTask(day)
+    task = input()
+    day.todo.append(task, 1)
+    return task
+
+# Enter Priority Tasks. Append each one to the to-do list after the most important one.
+# task = input(). 
+# 'exit button' sets flag for while condition  
+# do: enter a task, click 'add' to append to list with priority 2
+# repeat while continue = True.
+# 'exit' sets continue = False, ends the function
+
+# Enter Normal Tasks. Append each one to the to-do list after the priority tasks.
+# task = input(). 
+# 'exit button' sets flag for while condition  
+enterNormalTasks(day)
+    do: enter a task, 
+        day.list.append(task, 2)
+    while: continue = True.
+# 'exit' sets continue = False, ends the function
+
+# Edit Project List if needed
+checkProjectList(day)
+    manager.display(ProjectList)
+    "add"
+        manager.add(input())
+     "edit"
+        manager.edit(current)
+     "delete"
+         manager.delete(current)
+
+#mealtime value comes from button.
+recordFood(day, mealtime)
+*is there any food for this meal?
+if yes, start adding items until 'complete' is clicked.
+complete sets flag for while condition to end.
+
+Record your day:
+
+#Check off tasks when finished
+#change bool status on a to-do list task
+checkTask(task object)
+if checked == True,
+-toDoTask.setChecked(False)
+else
+-toDoTask.setChecked(True)
+
+
+Enter fun activities:
+Enter wellness activities:
+Brain Dumps:
+Ideas
+Gratitude
+Record Mood
+Favorite thing about today.
+
+Summary:
+-appointments for tomorrow
+-unfinished tasks
+-copy unfinished tasks to tomorrow's list.
+
+store 'day' as a file? or database item.
+
+Alternate View: The monthly planner
+-add/edit/remove events and their times, descriptions to the days of the month. possibly import this from another app.
+Displays the month, days of the month have a * if there's an event that day, days have a color depending on the mood that day
+Select the day to see the day planner for that day.
+
+
+Use case 1: me
+wake up, get notification that i need to plan my day
+run the planner script.
+enter the requested data.
+display day planner view.
+enter records into sections as needed.
+click 'end day' to end the day and print a summary as well as tomorrow's tasks.
+Automatically 'end day' and do not print summary when system date changes.
+
+
+Day Object:
+contains fields of various data types:
+Date date: stores a date object
+sleep in hours: stores a float
+number 1 task: stores a string description
+mood: stores an int
+fave thing about today: stores a string.
+
+Day object contains 'list' objects. 
+
+the following lists are used:
+appointment list (ordered): stores appointment objects
+to-do list (ordered): stores to-do objects : description, priority, boolean for completeness
+generic unordered list for brain dump, gratitude, wellness, ideas, current projects, fun, just lists of strings.
+food list: stores food objects
+
+appointment object: date, time, description, location
+to-do object: description, priority, boolean for completeness.
+food object: description, calories, carbs, fat, protein, fiber, sugars, amount
+
+Month Class
+stores all days in order in a vector.
+
+displayMonth(Month)
+return void
+
+Month Manager Object
+current = get selected day object
+
+addAppt()
+-get description
+-get fields
+return appointment object
+
+editAppt(appointment object)
+prompt
+if change description, 
+-get description
+-set description
+if change field,
+-get fields
+-set fields
+if cancel
+-do nothing.
+return appointment object
+
+deleteAppointment(appointment object)
+ask if you're sure
+if sure
+-delete appointment from day, delete appt from month, 
+if not sure,
+-do nothing.
+-return void
