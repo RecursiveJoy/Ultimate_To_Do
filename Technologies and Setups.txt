@@ -1,0 +1,112 @@
+we have 
+git
+configuring a git workflow document
+	the tests and the workflow doc run on github's servers, which are linux (free version) "continuous integration"
+
+install maven
+	maven and gradle are build tools that ensure a project builds the same on every machine. Maven makes the build process easy by shielding the developer from many details. It builds a project using it's project object model (POM file) and a set of plugins. Maven uses the POM and the project's sources to provide useful information about the project, such as a change log, mailing lists, dependencies, and unit test reports.
+	
+install maven wrapper:
+	maven wrapper is an entity that encapsulates and hides the underlying complexity of Maven by means of well-defined interfaces. A wrapper pattern is a class with a special interface that allows incompatible classes to work together. 
+
+mvnw:
+	mvnw is similar to gradlew. they allow you to run the maven project without having Maven installed and present on the path. Downloads the correct maven version if it's not found.
+
+POM:
+	POM stands for Project Object Model. it is a fundamental unit of work in Maven. It lives in the project's base directory. It contains info about the project and build config info. It also contains goals and plugins. The Super POM is Maven's default POM that all Poms inherit from.
+
+mvnw dependency tree
+	the dependency tree resolves all dependencies needed for the project.
+
+now delete the default java library files found in src
+
+add this to the POM:
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+Java frameworks:
+	Spring boot 'makes java programming quick, easy, and safer'. A framework is a body of prewritten code used by developers to create apps using Java. A framework acts as a template or skeleton. The developer can use it to create an application by filling in their own code as needed to get an app to work as intended. No more need to create every line of code from scratch.
+	includes classes and functions.
+
+making Application.java
+	create this directory: src/main/java/com/simplythewest/utd
+		'utd' is short for ultimate todo
+	and in utd create an Application.java
+
+intelliJ:
+	import the project to intelliJ.
+	right click on Ultimate Planner, open module settings, edit project sdk with the path you used to set JAVA_HOME.
+	now select it in the dropdown list in projects, and click ok
+
+Git:
+	add .idea and *.iml to .gitignore
+	then do a git reset in the terminal
+
+git add -u will add all unstaged changes to the staging area.
+
+git bash program:
+	run chmod +x ./mvnw while in the project directory.
+	this makes the file writeable.
+
+Windows:
+	remove the entire 'target' directory from the project folder.
+
+.gitignore: add the following to .gitignore:
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+then run git reset
+
+workflows file:
+	run: ./mvnw --no-transfer-progress test
+
+Spring Boot:
+	spring boot lets you make Java apps that can be started by using java -jar.
+	a command-line tool lets you run 'spring scripts'.
+	Spring Boot CLI is a tool that lets you prototype with Spring. You have a familiar Java-like syntax without so much boilerplate code. You don't NEED the cli, but it makes it easier.
+
+Liquibase:
+	Liquibase helps you manage databases.
+	uses 'changesets' to represent a single change to the db.
+	each changeset has an id and author attribute, these + filename of the changelog file uniquely identify it.
+	You can use SQL, XML, YAML, JSON formats to define your changes.
+	Changelogs: explicitly lists db changes in order. it is a ledger of changes with a list of changesets.
+	DATABASECHANGELOG is a tracking table that tracks which changesets have or haven't been deployed. This is auto-created if you didn't make one already.
+
+Docker:
+	Docker is an open-source project that automates the deployment of applications as portable, self-sufficient containers that can run on the cloud or on-premises.
+	Docker containers can run anywhere, natively on Linux or Windows, although you have to create a specific image for Linux and one for Windows hosts (can be a server or VM).
+	Developers can use development environments on Windows, Linux, or MacOS.
+	On the development computer, run a docker host where docker images are deployed, including the app and dependencies. developers who work on windows fcan create images for either linux or windows containers, but developers who work on UNIX or LINUX can only make linux images.
+	Install Docker Toolbox on Windows.
+	place the following docker-compose.yml file in the project directory:
+		
+version: "3.7"
+services:
+  db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: DontUseThisPassword
+
+	now run docker-compose up. this will start PostgreSQL
+	you can stop it with docker-compose down
+
+Maven POM file:
+	add dependencies 'liquibase' and 'spring data jpa':
+	1. use search.maven.org to find the dependencies.
+	2. choose the most relevant result's latest version link.
+	3. this displays the POM information.
