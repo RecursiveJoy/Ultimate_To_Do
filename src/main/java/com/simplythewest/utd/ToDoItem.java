@@ -1,14 +1,15 @@
 package com.simplythewest.utd;
 
-public class todoItem extends listItem implements Comparable<todoItem>{
-    int priority;
-    boolean completedStatus;
+public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
+    private int priority;
+    private boolean completedStatus;
 
 
     //accessors
-    public todoItem(String description, int priority)
+    public ToDoItem()
     {
-
+        priority = 0;
+        completedStatus = false;
     }
 
     public boolean getCompletedStatus()
@@ -26,7 +27,9 @@ public class todoItem extends listItem implements Comparable<todoItem>{
     public void setCompletedStatus()
     {
         if (this.completedStatus)
+        {
             this.completedStatus = false;
+        }
         else
             this.completedStatus = true;
     }
@@ -38,7 +41,7 @@ public class todoItem extends listItem implements Comparable<todoItem>{
 
 
     //helpers
-    public int compareTo(todoItem td)
+    public int compareTo(ToDoItem td)
     {
         return Integer.compare(this.priority, td.priority);
     }
