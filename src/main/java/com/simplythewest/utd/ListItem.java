@@ -2,14 +2,21 @@ package com.simplythewest.utd;
 
 import java.time.ZonedDateTime;
 
-public class listItem {
+public class ListItem {
 
-    String description;
-    ZonedDateTime timestamp;
+    private String description;
+    private ZonedDateTime timestamp;
 
-    public listItem()
+    public ListItem()
     {
         this.timestamp = ZonedDateTime.now();
+        description = "";
+    }
+
+    public ListItem(String description)
+    {
+        this.timestamp = ZonedDateTime.now();
+        this.description = description;
     }
 
     public String getDescription()
