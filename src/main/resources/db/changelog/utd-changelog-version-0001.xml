@@ -1,0 +1,15 @@
+<changeSet  id="1"  author="mwest">
+    <createTable  tableName="to_do_item">
+        <column  name="id" autoIncrement="true"  type="bigserial">
+            <constraints nullable="false" primaryKey="true"/>
+        </column>
+        <column  name="description"  type="string" >
+            <constraints nullable="false"/>
+        </column>
+        <column  name="timestamp"  type="timestamp with time zone">
+            <constraints nullable="false"/>
+        </column>
+        <column  name="priority"  type="int"/>
+        <column  name="completed_status"  type="boolean"/>
+    </createTable>
+</changeSet>
