@@ -1,4 +1,4 @@
-package ultimate_to_do;
+package com.simplythewest.utd;
 
 public class todoItem extends listItem implements Comparable<todoItem>{
     int priority;

@@ -1,4 +1,4 @@
-package ultimate_to_do;
+package com.simplythewest.utd;
 
 //PriorityListManager has a priorityList vector
 //
