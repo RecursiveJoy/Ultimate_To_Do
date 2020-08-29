@@ -27,7 +27,9 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
     public void setCompletedStatus()
     {
         if (this.completedStatus)
+        {
             this.completedStatus = false;
+        }
         else
             this.completedStatus = true;
     }

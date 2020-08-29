@@ -110,3 +110,8 @@ Maven POM file:
 	1. use search.maven.org to find the dependencies.
 	2. choose the most relevant result's latest version link.
 	3. this displays the POM information.
+
+Install pgcli and Python
+
+Create a changelog in spring boot for liquibase as an .xml file:
+    This will track database changes in postgresql.
