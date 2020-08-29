@@ -1,14 +1,15 @@
 package com.simplythewest.utd;
 
+import java.time.ZonedDateTime;
+
 public class listItem {
 
     String description;
-    java.util.Date dateOfCreation;
+    ZonedDateTime timestamp;
 
     public listItem()
     {
-        java.util.Date today = new java.util.Date();
-        this.dateOfCreation = today;
+        this.timestamp = ZonedDateTime.now();
     }
 
     public String getDescription()
