@@ -7,5 +7,4 @@
 
     <include relativeToChangelogFile="true" file="utd-changelog-version-0001"/>
 
-   <include file="db.changelog-1.0.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
