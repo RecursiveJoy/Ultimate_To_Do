@@ -1,23 +1,34 @@
 package ultimate_to_do;
 
-public class todoItem {
-    String description;
+public class todoItem extends listItem implements Comparable<todoItem>{
     int priority;
-    java.util.Date dateOfCreation;
+    boolean completedStatus;
 
-    public todoItem()
+
+    //accessors
+    public todoItem(String description, int priority)
     {
-        java.util.Date today = new java.util.Date();
-        this.dateOfCreation = today;
+
     }
 
-    public String getDescription()
+    public boolean getCompletedStatus()
     {
-        java.util.Scanner description = new java.util.Scanner(System.in);
-        System.out.println("Enter a task\n");
+        return this.completedStatus;
+    }
+
+    public int getPriority()
+    {
+        return this.priority;
+    }
 
 
-        return description.nextLine();
+    //mutators
+    public void setCompletedStatus()
+    {
+        if (this.completedStatus)
+            this.completedStatus = false;
+        else
+            this.completedStatus = true;
     }
 
     public void setPriority(int priority)
@@ -26,9 +37,10 @@ public class todoItem {
     }
 
 
-    public void setDescription(String description)
+    //helpers
+    public int compareTo(todoItem td)
     {
-        this.description = description;
+        return Integer.compare(this.priority, td.priority);
     }
 
 }
