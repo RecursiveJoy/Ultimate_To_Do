@@ -31,6 +31,7 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
      */
     protected ToDoItem()
     {
+        this.timestamp = ZonedDateTime.now();
         priority = 0;
         completedStatus = false;
     }
@@ -41,9 +42,9 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
      * @param priority is the priority value of the item, determines where it ends up on list.
      * @author Megan West
      */
-    public ToDoItem(
-        String description, int priority)
+    public ToDoItem(String description, int priority)
     {
+        this.timestamp = ZonedDateTime.now();
         this.description = description;
         this.priority = priority;
         completedStatus = false;
