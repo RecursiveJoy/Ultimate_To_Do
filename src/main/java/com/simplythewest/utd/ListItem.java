@@ -12,6 +12,7 @@ public class ListItem {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     private String description;
+    @Column(name = "timestamp")
     private ZonedDateTime timestamp;
 
     public ListItem()
@@ -32,7 +33,6 @@ public class ListItem {
         return description;
     }
 
-    @Column(name = "timestamp")
     public ZonedDateTime getTimestamp(){ return this.timestamp; }
 
     public void setDescription(String description)

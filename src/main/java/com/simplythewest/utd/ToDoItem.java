@@ -16,6 +16,7 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     private String description = "";
+    @Column(name = "timestamp")
     private ZonedDateTime timestamp;
     private int priority;
     private boolean completedStatus = false;

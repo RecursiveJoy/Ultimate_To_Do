@@ -7,19 +7,27 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-<changeSet  id="1"  author="mwest">
-    <createTable  tableName="to_do_item">
-        <column  name="id" autoIncrement="true"  type="bigserial">
-            <constraints nullable="false" primaryKey="true"/>
-        </column>
-        <column  name="description"  type="text" >
-            <constraints nullable="false"/>
-        </column>
-        <column  name="timestamp"  type="timestamp with time zone">
-            <constraints nullable="false"/>
-        </column>
-        <column  name="priority"  type="int"/>
-        <column  name="completed_status"  type="boolean"/>
-    </createTable>
-</changeSet>
+    <changeSet  id="1"  author="mwest">
+        <createTable  tableName="to_do_item">
+            <column  name="id" autoIncrement="true"  type="bigserial">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column  name="description"  type="text" >
+                <constraints nullable="false"/>
+            </column>
+            <column  name="timestamp"  type="timestamp with time zone">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="priority"  type="int"/>
+            <column  name="completed_status"  type="boolean"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet  author="mwest"  id="2">
+        <modifyDataType  columnName="timestamp"
+                         newDataType="timestamp"
+                         schemaName="public"
+                         tableName="to_do_item"/>
+    </changeSet>
+
 </databaseChangeLog>
