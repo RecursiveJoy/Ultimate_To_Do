@@ -1,13 +1,13 @@
-we have 
+we have
 git
 configuring a git workflow document
 	the tests and the workflow doc run on github's servers, which are linux (free version) "continuous integration"
 
 install maven
 	maven and gradle are build tools that ensure a project builds the same on every machine. Maven makes the build process easy by shielding the developer from many details. It builds a project using it's project object model (POM file) and a set of plugins. Maven uses the POM and the project's sources to provide useful information about the project, such as a change log, mailing lists, dependencies, and unit test reports.
-	
+
 install maven wrapper:
-	maven wrapper is an entity that encapsulates and hides the underlying complexity of Maven by means of well-defined interfaces. A wrapper pattern is a class with a special interface that allows incompatible classes to work together. 
+	maven wrapper is an entity that encapsulates and hides the underlying complexity of Maven by means of well-defined interfaces. A wrapper pattern is a class with a special interface that allows incompatible classes to work together.
 
 mvnw:
 	mvnw is similar to gradlew. they allow you to run the maven project without having Maven installed and present on the path. Downloads the correct maven version if it's not found.
@@ -91,7 +91,7 @@ Docker:
 	On the development computer, run a docker host where docker images are deployed, including the app and dependencies. developers who work on windows fcan create images for either linux or windows containers, but developers who work on UNIX or LINUX can only make linux images.
 	Install Docker Toolbox on Windows.
 	place the following docker-compose.yml file in the project directory:
-		
+
 version: "3.7"
 services:
   db:
@@ -115,3 +115,5 @@ Install pgcli and Python
 
 Create a changelog in spring boot for liquibase as an .xml file:
     This will track database changes in postgresql.
+
+PS C:\Users\Megumi> pgcli --host 127.0.0.1 --port 5432 --user postgres --password postgres postgres
