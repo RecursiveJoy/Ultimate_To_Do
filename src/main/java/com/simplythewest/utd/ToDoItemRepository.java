@@ -1,8 +1,9 @@
 package com.simplythewest.utd;
 
 import java.time.ZonedDateTime;
+import org.springframework.data.repository.CrudRepository;
 
-public interface ToDoItemRepository {
+public interface ToDoItemRepository extends CrudRepository<ToDoItem, Long>{
 
     //accessors
     public Long getID();

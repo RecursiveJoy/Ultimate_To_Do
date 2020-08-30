@@ -42,10 +42,9 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
      * @author Megan West
      */
     public ToDoItem(
-        String description, java.time.ZonedDateTime timestamp, int priority)
+        String description, int priority)
     {
         this.description = description;
-        this.timestamp = timestamp;
         this.priority = priority;
         completedStatus = false;
     }

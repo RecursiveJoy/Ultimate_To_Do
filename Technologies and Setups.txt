@@ -122,3 +122,20 @@ PS C:\Users\Megumi> pgcli --host 127.0.0.1 --port 5432 --user postgres --passwor
 JPA: The Java Persistence API:
     used to store Java objects in a relational database (in our example, postgresql)
     persistence: a mechanism by which java objects outlive the application that made them.
+
+JPQL: Java Persistence API QUery Language
+    it is an abstraction over SQL that makes SQL easier to use.
+
+Testing:
+    https://reflectoring.io/spring-boot-data-jpa-test/
+
+    a "schema" in SQL is a collection of database objects linked with the same db username.
+    that username is called the "schema owner". Schema always belong to a single database,
+    whereas a db can have several schemas. Schemas are like containers or namespaces.
+    They contain tables, views, procedures, indices, etc.
+
+    Before we can test any queries to the db, we need to create a SQL schema.
+
+    Spring Boot supports executing a custom schema.sql file when the application starts up.
+
+
