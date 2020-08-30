@@ -12,8 +12,9 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Maven_test
-        run: ./mvnw --no-transfer-progress test
 
       - name: Docker compose up
         run: docker-compose up -d
+
+      - name: Maven_test
+        run: ./mvnw --no-transfer-progress test

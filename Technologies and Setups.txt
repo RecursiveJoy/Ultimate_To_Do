@@ -73,11 +73,12 @@ workflows file:
 
 Spring Boot:
 	spring boot lets you make Java apps that can be started by using java -jar.
+	this is a simplified command.
 	a command-line tool lets you run 'spring scripts'.
 	Spring Boot CLI is a tool that lets you prototype with Spring. You have a familiar Java-like syntax without so much boilerplate code. You don't NEED the cli, but it makes it easier.
 
 Liquibase:
-	Liquibase helps you manage databases.
+	Liquibase helps you track the changes you make to databases.
 	uses 'changesets' to represent a single change to the db.
 	each changeset has an id and author attribute, these + filename of the changelog file uniquely identify it.
 	You can use SQL, XML, YAML, JSON formats to define your changes.
@@ -117,3 +118,24 @@ Create a changelog in spring boot for liquibase as an .xml file:
     This will track database changes in postgresql.
 
 PS C:\Users\Megumi> pgcli --host 127.0.0.1 --port 5432 --user postgres --password postgres postgres
+
+JPA: The Java Persistence API:
+    used to store Java objects in a relational database (in our example, postgresql)
+    persistence: a mechanism by which java objects outlive the application that made them.
+
+JPQL: Java Persistence API QUery Language
+    it is an abstraction over SQL that makes SQL easier to use.
+
+Testing:
+    https://reflectoring.io/spring-boot-data-jpa-test/
+
+    a "schema" in SQL is a collection of database objects linked with the same db username.
+    that username is called the "schema owner". Schema always belong to a single database,
+    whereas a db can have several schemas. Schemas are like containers or namespaces.
+    They contain tables, views, procedures, indices, etc.
+
+    Before we can test any queries to the db, we need to create a SQL schema.
+
+    Spring Boot supports executing a custom schema.sql file when the application starts up.
+
+
