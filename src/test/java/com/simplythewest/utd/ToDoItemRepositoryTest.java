@@ -7,6 +7,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.simplythewest.utd.ToDoItem;
 import com.simplythewest.utd.ToDoItemRepository;
+import static org.assertj.core.api.Assertions.*;
+
 
 @DataJpaTest
 @TestPropertySource(properties = {
@@ -24,7 +26,7 @@ class ToDoItemRepositoryTest {
         todorepo1.save(new ToDoItem("second", 1));
         todorepo1.save(new ToDoItem("third", 2));
         todorepo1.save(new ToDoItem("fourth", 4));
-        ToDoItem third_item = ToDoItemRepository.findByPriority("2");
+        ToDoItem third_item = todorepo1.findByPriority(2);
         assertThat(third_item).isNotNull();
     }
 

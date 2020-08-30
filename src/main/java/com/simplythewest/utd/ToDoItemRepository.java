@@ -34,6 +34,7 @@ public interface ToDoItemRepository extends CrudRepository<ToDoItem, Long>{
 
     public int compareTo(ToDoItem td);
 
-    //core functions
+    //custom functions
+    ToDoItem findByPriority(int priority);
 
 }
