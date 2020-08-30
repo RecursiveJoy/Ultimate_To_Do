@@ -1,16 +1,15 @@
 package com.simplythewest.utd;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 
-@Entity
+@MappedSuperclass
 public class ListItem {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
+    @SequenceGenerator(name="id_generator", sequenceName = "to_do_item_id_seq", allocationSize=50)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     private String description;
     private ZonedDateTime timestamp;
@@ -27,10 +26,14 @@ public class ListItem {
         this.description = description;
     }
 
+    @Column(name = "Description")
     public String getDescription()
     {
         return description;
     }
+
+    @Column(name = "timestamp")
+    public ZonedDateTime getTimestamp(){ return this.timestamp; }
 
     public void setDescription(String description)
     {

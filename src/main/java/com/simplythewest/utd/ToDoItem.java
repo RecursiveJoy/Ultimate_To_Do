@@ -1,19 +1,19 @@
 package com.simplythewest.utd;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 /**ToDoItem class creates one ToDoItem object.
  * @author Megan West
  */
 @Entity
+@Table(name = "to_do_item")
 public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
+    @SequenceGenerator(name="id_generator", sequenceName = "to_do_item_id_seq", allocationSize=50)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     private String description = "";
     private ZonedDateTime timestamp;
@@ -37,7 +37,6 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
     /**Parameterized constructor sets attributes with provided values:
      * @author Megan West
      * @param description is the description of the list item that is displayed.
-     * @param timestamp is the time that the object was created.
      * @param priority is the priority value of the item, determines where it ends up on list.
      * @author Megan West
      */
@@ -54,13 +53,14 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
      * CompletedStatus, Description, TimeStamp, and Priority.
      * getDescription and getTimestamp are inherited from ToDoItem class.
      */
-
+    @Column(name = "id")
     public Long getId(){ return id; }
 
     /**CompletedStatus is true if the list item has been marked complete.
      * @author Megan West
      * @return boolean. true if item was marked complete, false if incomplete.
      */
+    @Column(name = "completed_status")
     public boolean getCompletedStatus()
     {
         return completedStatus;
@@ -72,6 +72,7 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
      * @author Megan West
      * @return int Priority. See note above for values.
      */
+    @Column(name = "priority")
     public int getPriority()
     {
         return priority;
@@ -96,7 +97,7 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
 
     public void setPriority(int priority)
     {
-        priority = priority;
+        this.priority = priority;
     }
 
 
