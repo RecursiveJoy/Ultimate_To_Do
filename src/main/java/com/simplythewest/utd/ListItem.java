@@ -1,9 +1,17 @@
 package com.simplythewest.utd;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.ZonedDateTime;
 
+@Entity
 public class ListItem {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
     private String description;
     private ZonedDateTime timestamp;
 
@@ -27,6 +35,11 @@ public class ListItem {
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public String toString()
+    {
+        return description + "" + timestamp;
     }
 
 }

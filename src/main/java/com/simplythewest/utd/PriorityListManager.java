@@ -4,9 +4,6 @@ package com.simplythewest.utd;
 //
 public class PriorityListManager extends ListManager{
 
-    //priorityList is a vector that holds todoItems
-
-
     //PRIVATE HELPER FUNCTIONS
 
     //sortOnPriorityValue()
