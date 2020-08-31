@@ -11,4 +11,5 @@ public interface ToDoItemRepository extends CrudRepository<ToDoItem, Long>{
 
     //custom functions
     List<ToDoItem> findAll(Sort priority);
+    void deleteAllByCompletedStatus(boolean completedStatus);
 }

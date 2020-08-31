@@ -25,6 +25,9 @@ public class MainView extends VerticalLayout {
         this.priorityLayout = new Grid<>(ToDoItem.class);
         add(priorityLayout);
         listToDoItems();
+        myDTO = new ToDoDTO();
+        getPriorityFromRadio();
+        getDescriptionFromInput();
         add(AddButton());
     }
 
@@ -68,9 +71,6 @@ public class MainView extends VerticalLayout {
 
     private void addEvent()
     {
-        myDTO = new ToDoDTO();
-        getPriorityFromRadio();
-        getDescriptionFromInput();
         toDoRepo1.save(myDTO.DTOtoToDoItem());
         listToDoItems();
     }
