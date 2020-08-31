@@ -5,10 +5,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.simplythewest.utd.ToDoItem;
 import com.simplythewest.utd.ToDoItemRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
@@ -26,8 +31,9 @@ class ToDoItemRepositoryTest {
         todorepo1.save(new ToDoItem("second", 1));
         todorepo1.save(new ToDoItem("third", 2));
         todorepo1.save(new ToDoItem("fourth", 3));
-        ToDoItem third_item = todorepo1.findByPriority(2);
-        assertThat(third_item).isNotNull();
+        List<ToDoItem> ordered =
+            todorepo1.findAll(Sort.by(Sort.Direction.DESC, "priority"));
+        assertThat(ordered.get(2)).isNotNull();
     }
 
 }
