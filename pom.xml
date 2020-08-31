@@ -8,10 +8,10 @@
         <version>2.2.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.simplythewest.utd</groupId>
-    <artifactId>spring-boot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot</name>
+        <groupId>com.simplythewest.utd</groupId>
+        <artifactId>spring-boot</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <name>spring-boot</name>
     <description>Ultimate Planner</description>
 
     <properties>
@@ -61,6 +61,24 @@
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-bom</artifactId>
+            <!-- declare the latest Vaadin version
+             as a property or directly here -->
+            <version>14.3.4</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>
+                vaadin-spring-boot-starter
+            </artifactId>
+            <version>14.3.4</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -69,7 +87,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
+
 
 </project>
