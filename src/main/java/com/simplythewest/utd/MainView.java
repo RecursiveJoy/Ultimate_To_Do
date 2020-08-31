@@ -68,8 +68,10 @@ public class MainView extends VerticalLayout {
 
     private void addEvent()
     {
+        myDTO = new ToDoDTO();
         getPriorityFromRadio();
         getDescriptionFromInput();
+        toDoRepo1.save(myDTO.DTOtoToDoItem());
         listToDoItems();
     }
 }

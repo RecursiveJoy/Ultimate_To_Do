@@ -2,10 +2,11 @@ package com.simplythewest.utd;
 
 import java.io.Serializable;
 
-public class ToDoDTO implements Serializable{
+public class ToDoDTO extends ToDoItem implements Serializable{
 
     private String description = "";
     private int priority = 0;
+    private ToDoItem anItem;
 
 
     public void getDescription(String description)
@@ -23,4 +24,12 @@ public class ToDoDTO implements Serializable{
             default: this.priority = 3;
         }
     }
+
+    public ToDoItem DTOtoToDoItem()
+    {
+        anItem = new ToDoItem(this.description, this.priority);
+        return anItem;
+    }
+
+
 }
