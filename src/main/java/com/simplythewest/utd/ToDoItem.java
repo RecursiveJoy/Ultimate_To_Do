@@ -8,17 +8,20 @@ import java.time.ZonedDateTime;
  */
 @Entity
 @Table(name = "to_do_item")
-public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
+public class ToDoItem implements Comparable<ToDoItem>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
     @SequenceGenerator(name="id_generator", sequenceName = "to_do_item_id_seq", allocationSize=50)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-    private String description = "";
+    @Column(name = "description")
+    private String description;
     @Column(name = "timestamp")
     private ZonedDateTime timestamp;
+    @Column(name = "priority")
     private int priority;
+    @Column(name = "completed_status")
     private boolean completedStatus = false;
 
 
@@ -31,6 +34,7 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
      */
     protected ToDoItem()
     {
+        this.description = "";
         this.timestamp = ZonedDateTime.now();
         priority = 0;
         completedStatus = false;
@@ -44,8 +48,8 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
      */
     public ToDoItem(String description, int priority)
     {
-        this.timestamp = ZonedDateTime.now();
         this.description = description;
+        this.timestamp = ZonedDateTime.now();
         this.priority = priority;
         completedStatus = false;
     }
@@ -55,33 +59,45 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
      * CompletedStatus, Description, TimeStamp, and Priority.
      * getDescription and getTimestamp are inherited from ToDoItem class.
      */
-    @Column(name = "id")
     public Long getId(){ return id; }
 
-    /**CompletedStatus is true if the list item has been marked complete.
-     * @author Megan West
-     * @return boolean. true if item was marked complete, false if incomplete.
-     */
-    @Column(name = "completed_status")
-    public boolean getCompletedStatus()
+    public String getDescription()
     {
-        return completedStatus;
+        return description;
     }
 
+    public ZonedDateTime getTimestamp(){ return this.timestamp; }
+
     /**getPriority returns the priority value of the list item.
-     * priority values are 'URGENT', 'DAILY', 'WEEKLY', and 'MONTHLY'
-     * where MONTHLY = 0, WEEKLY = 1, DAILY = 2, URGENT = 3
      * @author Megan West
      * @return int Priority. See note above for values.
      */
-    @Column(name = "priority")
     public int getPriority()
     {
         return priority;
     }
 
+    /**CompletedStatus is true if the list item has been marked complete.
+     * @author Megan West
+     * @return boolean. true if item was marked complete, false if incomplete.
+     */
+    public boolean getCompletedStatus()
+    {
+        return completedStatus;
+    }
 
     //mutators
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public void setPriority(int priority)
+    {
+        this.priority = priority;
+    }
+
     public void setCompletedStatusToOpposite()
     {
         if (completedStatus)
@@ -97,14 +113,7 @@ public class ToDoItem extends ListItem implements Comparable<ToDoItem>{
         completedStatus = newStatus;
     }
 
-    public void setPriority(int priority)
-    {
-        this.priority = priority;
-    }
-
-
     //helpers
-
     @Override
     public String toString()
     {

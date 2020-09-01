@@ -74,7 +74,7 @@ workflows file:
 Spring Boot:
 	spring boot lets you make Java apps that can be started by using java -jar.
 	this is a simplified command.
-	a command-line tool lets you run 'spring scripts'.
+	a command-line tool lets you run 'spring scripts'.G
 	Spring Boot CLI is a tool that lets you prototype with Spring. You have a familiar Java-like syntax without so much boilerplate code. You don't NEED the cli, but it makes it easier.
 
 Liquibase:
