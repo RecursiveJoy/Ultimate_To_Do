@@ -8,7 +8,7 @@ public class ToDoDTO implements Serializable{
     private int priority = 0;
 
 
-    public void getDescription(String description)
+    public void setDescription(String description)
     {
         this.description = description;
     }
