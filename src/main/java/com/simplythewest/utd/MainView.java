@@ -1,12 +1,12 @@
 package com.simplythewest.utd;
 
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.component.textfield.NumberField;
-import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.button.*;
+import com.vaadin.flow.component.grid.*;
+import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.orderedlayout.*;
+import com.vaadin.flow.component.textfield.*;
+import com.vaadin.flow.component.radiobutton.*;
+
 import com.vaadin.flow.router.Route;
 import org.springframework.data.domain.Sort;
 
@@ -17,57 +17,58 @@ import java.util.List;
 public class MainView extends VerticalLayout {
 
     private final ToDoItemRepository toDoRepo1;
-    final Grid<ToDoItem> priorityLayout;
-    ToDoDTO myDTO;
+    private ToDoDTO myDTO;
+    private ArrayList<ToDoItem> priorityArrayList;
+    private Grid<ToDoItem> priorityGridList;
 
     public MainView(ToDoItemRepository toDoRepo)
     {
+        //initialize private attributes
         toDoRepo1 = toDoRepo;
         myDTO = new ToDoDTO();
-        toDoRepo.deleteAll();
+        priorityArrayList = new ArrayList<ToDoItem>();
+        priorityGridList = new Grid<>(ToDoItem.class);
 
-        //create grid layout
-        priorityLayout = new Grid<>(ToDoItem.class);
-        add(priorityLayout);
-        listToDoItems();
-        getPriorityFromRadio();
-        getDescriptionFromInput();
-        add(addButton());
-        add(clearButton());
-        add(deleteField());
+        //build the GUI
+        buildGUI();
     }
 
-    private void listToDoItems()
+    private void buildGUI()
     {
+        //create the todo list item table and display it.
+        add(priorityGridList);
+        updatePriorityList();
+
+        add(addButton());
+
+        Button clearButton = new Button();
+        clearButton.setVisible(false);
+
+        Button deleteButton = new Button();
+        deleteButton.setVisible(false);
+
+        while(!priorityArrayList.isEmpty())
+        {
+            clearButton.setVisible(true);
+            deleteButton.setVisible(true);
+        }
+
+        priorityGridList.getDataProvider().refreshAll();
+    }
+
+    //GRID functions
+    private void updatePriorityList()
+    {
+        priorityGridList.getDataProvider().refreshAll();
         List<ToDoItem> ordered =
             toDoRepo1.findAll(Sort.by(Sort.Direction.ASC, "priority"));
-        priorityLayout.setItems(ordered);
-    }
+        priorityGridList.setItems(ordered);    }
 
-    private void getDescriptionFromInput()
-    {
-        TextField tf = new TextField("Enter description");
-        tf.addValueChangeListener(event ->
-            myDTO.setDescription((event.getValue())));
-        add(tf);
-    }
-
-    private void getPriorityFromRadio() {
-        RadioButtonGroup<String> priorityValues =
-            new RadioButtonGroup<String>();
-        priorityValues.setItems("High", "Medium", "Low");
-        add(priorityValues);
-
-        Div value = new Div();
-        value.setText("Select a priority for the list item");
-        priorityValues.addValueChangeListener(event ->
-            myDTO.setPriority(priorityValues.getValue()));
-    }
-
+    //ADD functions
 
     private Button addButton()
     {
-        Button addButton = new Button("Add item to the list");
+        Button addButton = new Button("Add item to list");
 
         addButton.addClickListener(
             clickEvent -> addEvent());
@@ -75,6 +76,71 @@ public class MainView extends VerticalLayout {
         return addButton;
     }
 
+    private void addEvent()
+    {
+        add(descriptionField());
+
+        //create Priority Radio buttons
+        RadioButtonGroup<String> priorityValues =
+            new RadioButtonGroup<String>();
+        priorityValues.setItems("High", "Medium", "Low");
+        Div value = new Div();
+        value.setText("Select a priority for the list item");
+        priorityValues.addValueChangeListener(event ->
+            myDTO.setPriority(priorityValues.getValue()));
+        priorityValues.setVisible(true);
+        add(priorityValues);
+        add(submitButton());
+    }
+
+    private TextField descriptionField()
+    {
+        //create the description field for new tasks.
+        //description field is visible initially
+        TextField descriptionField = new TextField(
+            "Add a task then press ENTER."
+        );
+        descriptionField.addValueChangeListener(event ->
+            myDTO.setDescription(event.getValue()));
+        descriptionField.setVisible(true);
+        return descriptionField;
+    }
+
+    private void submit()
+    {
+        ToDoItem new_item = myDTO.DTOtoToDoItem();
+        toDoRepo1.save(new_item);
+        priorityArrayList.add(new_item);
+        updatePriorityList();
+    }
+
+    private Button submitButton()
+    {
+        Button submitButton = new Button("Submit");
+
+        submitButton.addClickListener(
+            clickEvent -> submit());
+
+        return submitButton;
+    }
+
+    private void exitAdd()
+    {
+
+    }
+
+    private Button exitAddButton()
+    {
+        Button exitAddButton = new Button("Exit Add Mode");
+
+        exitAddButton.addClickListener(
+            clickEvent -> exitAdd());
+
+        return exitAddButton;
+
+    }
+
+    //CLEAR methods
     private Button clearButton()
     {
         Button clearButton = new Button("Clear list");
@@ -83,12 +149,6 @@ public class MainView extends VerticalLayout {
             clickEvent -> toDoRepo1.deleteAll());
 
         return clearButton;
-    }
-
-    private void addEvent()
-    {
-        toDoRepo1.save(myDTO.DTOtoToDoItem());
-        listToDoItems();
     }
 
     private NumberField deleteField()
@@ -105,6 +165,7 @@ public class MainView extends VerticalLayout {
     private void deleteEvent(double idToDelete)
     {
         toDoRepo1.deleteById(Double.valueOf(idToDelete).longValue());
-        listToDoItems();
+        updatePriorityList();
     }
+
 }
