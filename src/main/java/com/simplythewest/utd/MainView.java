@@ -35,26 +35,32 @@ public class MainView extends VerticalLayout {
 
     private void buildGUI()
     {
+        toDoRepo1.deleteAllByCompletedStatus(false);
         //create the todo list item table and display it.
         add(priorityGridList);
         updatePriorityList();
 
-        add(addButton());
+        Button addButton = addButton();
+        add(addButton);
 
-        Button clearButton = new Button();
-        clearButton.setVisible(false);
-
-        Button deleteButton = new Button();
-        deleteButton.setVisible(false);
+        Button clearButton = clearButton();
+        add(clearButton);
 
         while(!priorityArrayList.isEmpty())
         {
             clearButton.setVisible(true);
-            deleteButton.setVisible(true);
         }
 
-        priorityGridList.getDataProvider().refreshAll();
+        NumberField deleteField = deleteField();
+        add(deleteField);
+
+        while(!priorityArrayList.isEmpty())
+        {
+            deleteField.setVisible(true);
+        }
+
     }
+
 
     //GRID functions
     private void updatePriorityList()
@@ -64,19 +70,19 @@ public class MainView extends VerticalLayout {
             toDoRepo1.findAll(Sort.by(Sort.Direction.ASC, "priority"));
         priorityGridList.setItems(ordered);    }
 
-    //ADD functions
 
+    //ADD functions
     private Button addButton()
     {
         Button addButton = new Button("Add item to list");
 
         addButton.addClickListener(
-            clickEvent -> addEvent());
+            clickEvent -> addModeEvent());
 
         return addButton;
     }
 
-    private void addEvent()
+    private void addModeEvent()
     {
         add(descriptionField());
 
@@ -123,7 +129,7 @@ public class MainView extends VerticalLayout {
 
         return submitButton;
     }
-
+/**
     private void exitAdd()
     {
 
@@ -139,11 +145,12 @@ public class MainView extends VerticalLayout {
         return exitAddButton;
 
     }
-
+**/
     //CLEAR methods
     private Button clearButton()
     {
         Button clearButton = new Button("Clear list");
+        clearButton.setVisible(false);
 
         clearButton.addClickListener(
             clickEvent -> toDoRepo1.deleteAll());
@@ -151,10 +158,14 @@ public class MainView extends VerticalLayout {
         return clearButton;
     }
 
+
+    //DELETE METHODS
     private NumberField deleteField()
     {
         NumberField deleteField =
             new NumberField("Item ID to delete");
+
+        deleteField.setVisible(false);
 
         deleteField.addValueChangeListener(event ->
             deleteEvent(deleteField.getValue()));
