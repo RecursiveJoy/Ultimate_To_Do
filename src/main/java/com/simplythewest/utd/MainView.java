@@ -8,6 +8,7 @@ import com.vaadin.flow.component.textfield.*;
 import com.vaadin.flow.component.radiobutton.*;
 
 import com.vaadin.flow.router.Route;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
@@ -35,7 +36,6 @@ public class MainView extends VerticalLayout {
 
     private void buildGUI()
     {
-        toDoRepo1.deleteAllByCompletedStatus(false);
         //create the todo list item table and display it.
         add(priorityGridList);
         updatePriorityList();
@@ -46,18 +46,8 @@ public class MainView extends VerticalLayout {
         Button clearButton = clearButton();
         add(clearButton);
 
-        while(!priorityArrayList.isEmpty())
-        {
-            clearButton.setVisible(true);
-        }
-
         NumberField deleteField = deleteField();
         add(deleteField);
-
-        while(!priorityArrayList.isEmpty())
-        {
-            deleteField.setVisible(true);
-        }
 
     }
 
@@ -68,7 +58,8 @@ public class MainView extends VerticalLayout {
         priorityGridList.getDataProvider().refreshAll();
         List<ToDoItem> ordered =
             toDoRepo1.findAll(Sort.by(Sort.Direction.ASC, "priority"));
-        priorityGridList.setItems(ordered);    }
+        priorityGridList.setItems(ordered);
+    }
 
 
     //ADD functions
@@ -92,6 +83,7 @@ public class MainView extends VerticalLayout {
         priorityValues.setItems("High", "Medium", "Low");
         Div value = new Div();
         value.setText("Select a priority for the list item");
+        add(value);
         priorityValues.addValueChangeListener(event ->
             myDTO.setPriority(priorityValues.getValue()));
         priorityValues.setVisible(true);
@@ -129,6 +121,7 @@ public class MainView extends VerticalLayout {
 
         return submitButton;
     }
+
 /**
     private void exitAdd()
     {
@@ -146,16 +139,27 @@ public class MainView extends VerticalLayout {
 
     }
 **/
+
     //CLEAR methods
     private Button clearButton()
     {
         Button clearButton = new Button("Clear list");
-        clearButton.setVisible(false);
 
         clearButton.addClickListener(
-            clickEvent -> toDoRepo1.deleteAll());
+            clickEvent -> clearList());
 
         return clearButton;
+    }
+
+    private void clearList()
+    {
+        toDoRepo1.deleteAll();
+        updatePriorityList();
+    }
+
+    private void clearCompleted()
+    {
+        toDoRepo1.deleteAllByCompletedStatus(true);
     }
 
 
@@ -165,7 +169,7 @@ public class MainView extends VerticalLayout {
         NumberField deleteField =
             new NumberField("Item ID to delete");
 
-        deleteField.setVisible(false);
+        deleteField.setVisible(true);
 
         deleteField.addValueChangeListener(event ->
             deleteEvent(deleteField.getValue()));
@@ -175,8 +179,30 @@ public class MainView extends VerticalLayout {
 
     private void deleteEvent(double idToDelete)
     {
-        toDoRepo1.deleteById(Double.valueOf(idToDelete).longValue());
-        updatePriorityList();
+        if(!priorityArrayList.isEmpty()) {
+            try {
+                toDoRepo1.deleteById(Double.valueOf(idToDelete).longValue());
+            } catch (EmptyResultDataAccessException a) {
+                Div message = new Div();
+                message.setText("The index you entered is not in the list.");
+                add(message);
+                updatePriorityList();
+            } catch (NullPointerException b) {
+                Div message = new Div();
+                message.setText("Please enter an index and try again.");
+                add(message);
+                updatePriorityList();
+            }
+        }
+        else {
+            Div message = new Div();
+            message.setText("The list is empty.");
+            add(message);
+        }
     }
+
+    //UPDATE METHODS
+
+    //COMPLETE ITEM METHODS
 
 }
