@@ -5,7 +5,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.router.Route;
 
-@Route("utd/DeleteMenu")
+@Route("DeleteMenu")
 public class DeleteMenu extends VerticalLayout {
 
     private final ToDoItemRepository myToDoRepo;

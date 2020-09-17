@@ -23,7 +23,7 @@ public class MainMenu extends HorizontalLayout{
         addButton.addClickListener(
             clickEvent ->
                 addButton.getUI().ifPresent(ui ->
-                    ui.navigate("utd/AddMenu"))
+                    ui.navigate("AddMenu"))
         );
 
         return addButton;
@@ -36,7 +36,7 @@ public class MainMenu extends HorizontalLayout{
         deleteButton.addClickListener(
             clickEvent ->
                 deleteButton.getUI().ifPresent(ui->
-                    ui.navigate("utd/DeleteMenu"))
+                    ui.navigate("DeleteMenu"))
         );
 
         return deleteButton;
@@ -60,7 +60,7 @@ public class MainMenu extends HorizontalLayout{
         editButton.addClickListener(
             clickEvent ->
                 editButton.getUI().ifPresent(ui->
-                    ui.navigate("utd/EditMenu"))
+                    ui.navigate("EditMenu"))
         );
 
         return editButton;

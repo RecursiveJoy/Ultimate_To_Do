@@ -1,19 +1,24 @@
 package com.simplythewest.utd;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
-@Route("utd/EditMenu")
-public class EditMenu {
+@Route("EditMenu")
+public class EditMenu extends VerticalLayout {
     private ToDoDTO myToDoDTO;
     private ToDoItemRepository myToDoRepo;
 
-    public EditMenu(ToDoItemRepository otherToDoRepo)
+    public EditMenu (ToDoItemRepository otherToDoRepo)
     {
         myToDoRepo = otherToDoRepo;
         myToDoDTO = new ToDoDTO();
+
+        add(editField());
+        add(descriptionField());
+        add(backButton());
     }
 
     private NumberField editField()

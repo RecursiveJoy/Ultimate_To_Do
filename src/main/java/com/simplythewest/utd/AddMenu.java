@@ -7,21 +7,19 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.router.Route;
 
-@Route("utd/AddMenu")
-public class AddMenu {
+@Route("AddMenu")
+public class AddMenu extends VerticalLayout {
 
     private ToDoDTO toDoItem;
-    private VerticalLayout addMenu;
 
     public AddMenu()
     {
         toDoItem = new ToDoDTO();
-        addMenu = new VerticalLayout();
-        addMenu.add(descriptionField());
-        addMenu.add(priorityLabel());
-        addMenu.add(prioritySelection());
-        addMenu.add(submitButton());
-        addMenu.add(backButton());
+        add(descriptionField());
+        add(priorityLabel());
+        add(prioritySelection());
+        add(submitButton());
+        add(backButton());
     }
 
     private TextField descriptionField()
