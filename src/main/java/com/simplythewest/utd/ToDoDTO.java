@@ -29,5 +29,9 @@ public class ToDoDTO implements Serializable{
         return new ToDoItem(this.description, this.priority);
     }
 
+    public String getDescription()
+    {
+        return description;
+    }
 
 }
