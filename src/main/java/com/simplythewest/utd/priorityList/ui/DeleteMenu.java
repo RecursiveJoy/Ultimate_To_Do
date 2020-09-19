@@ -1,5 +1,6 @@
-package com.simplythewest.utd;
+package com.simplythewest.utd.priorityList.ui;
 
+import com.simplythewest.utd.priorityList.models.ToDoItemRepository;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;

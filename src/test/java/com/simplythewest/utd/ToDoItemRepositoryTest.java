@@ -1,11 +1,12 @@
 package com.simplythewest.utd;
 
+import com.simplythewest.utd.priorityList.models.ToDoItemRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
-import com.simplythewest.utd.ToDoItem;
+import com.simplythewest.utd.priorityList.models.ToDoItem;
 
 import java.util.List;
 

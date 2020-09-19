@@ -1,4 +1,4 @@
-package com.simplythewest.utd;
+package com.simplythewest.utd.priorityList.models;
 
 import java.io.Serializable;
 

@@ -1,9 +1,7 @@
-package com.simplythewest.utd;
+package com.simplythewest.utd.priorityList.models;
 
 import java.util.List;
-import java.util.Optional;
 
-import com.simplythewest.utd.ToDoItem;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

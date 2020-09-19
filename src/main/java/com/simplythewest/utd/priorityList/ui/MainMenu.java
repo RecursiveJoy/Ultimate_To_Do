@@ -1,15 +1,19 @@
-package com.simplythewest.utd;
+package com.simplythewest.utd.priorityList.ui;
 
+import com.simplythewest.utd.priorityList.models.ToDoItemRepository;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 public class MainMenu extends HorizontalLayout{
 
     private final ToDoItemRepository myToDoRepo;
 
+
     MainMenu(ToDoItemRepository otherToDoRepo)
     {
         myToDoRepo = otherToDoRepo;
+
         add(addButton());
         add(deleteButton());
         add(clearButton());
@@ -22,8 +26,10 @@ public class MainMenu extends HorizontalLayout{
 
         addButton.addClickListener(
             clickEvent ->
+            {
                 addButton.getUI().ifPresent(ui ->
-                    ui.navigate("AddMenu"))
+                    ui.navigate("AddMenu"));
+            }
         );
 
         return addButton;

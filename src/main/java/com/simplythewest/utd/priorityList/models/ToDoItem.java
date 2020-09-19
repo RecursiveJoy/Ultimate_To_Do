@@ -1,4 +1,4 @@
-package com.simplythewest.utd;
+package com.simplythewest.utd.priorityList.models;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
