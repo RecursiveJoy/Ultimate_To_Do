@@ -1,4 +1,4 @@
-package com.simplythewest.utd;
+package com.simplythewest.utd.priorityList;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
