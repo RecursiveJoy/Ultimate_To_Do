@@ -1,20 +1,18 @@
 package com.simplythewest.utd.priorityList.ui;
 
-import com.simplythewest.utd.priorityList.models.ListManager;
 import com.simplythewest.utd.priorityList.models.ToDoDTO;
 import com.simplythewest.utd.priorityList.models.ToDoItem;
 import com.simplythewest.utd.priorityList.models.ToDoItemRepository;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.router.Route;
 import org.springframework.data.domain.Sort;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Route("AddMenu")
