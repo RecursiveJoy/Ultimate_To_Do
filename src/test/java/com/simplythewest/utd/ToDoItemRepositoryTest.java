@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class ToDoItemRepositoryTest {
 
+    @Autowired
     private ToDoItemRepository todorepo1;
 
     @Test
