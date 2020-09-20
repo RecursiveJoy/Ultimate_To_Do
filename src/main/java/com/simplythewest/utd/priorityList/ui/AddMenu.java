@@ -2,60 +2,63 @@ package com.simplythewest.utd.priorityList.ui;
 
 import com.simplythewest.utd.priorityList.models.ListManager;
 import com.simplythewest.utd.priorityList.models.ToDoDTO;
+import com.simplythewest.utd.priorityList.models.ToDoItem;
 import com.simplythewest.utd.priorityList.models.ToDoItemRepository;
-import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.router.Route;
+import org.springframework.data.domain.Sort;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Route("AddMenu")
 public class AddMenu extends VerticalLayout {
 
     private ToDoDTO toDoItem;
     private ToDoItemRepository myToDoRepo;
-    private ListManager listManager;
+    private Grid<ToDoItem> myList;
 
     public AddMenu(ToDoItemRepository otherToDoRepo)
     {
-        //initialize member variables
-        toDoItem = new ToDoDTO();
         myToDoRepo = otherToDoRepo;
-        listManager = new ListManager(myToDoRepo);
+        toDoItem = new ToDoDTO();
+        myList = new Grid<>();
 
+        List<ToDoItem> theList = otherToDoRepo.findAll(Sort.by("priority").ascending());
 
-        //display the list
-        add(listManager.getGrid());
+        if (!theList.isEmpty())
+        {
+            myList.setItems(theList);
+        }
 
-        //add the fields and buttons
+        add(myList);
         add(addFields());
-        add(MenuButtons());
-
+        add(menuButtons());
     }
 
     private VerticalLayout addFields()
     {
-        //display fields top to bottom
-        VerticalLayout fieldsLayout = new VerticalLayout();
-        fieldsLayout.add(descriptionField());
-        fieldsLayout.add(priorityLabel());
-        fieldsLayout.add(prioritySelection());
+        VerticalLayout theAddFields = new VerticalLayout();
 
-        return fieldsLayout;
+        theAddFields.add(descriptionField());
+        theAddFields.add(priorityLabel());
+        theAddFields.add(prioritySelection());
+
+        return theAddFields;
     }
 
-    private HorizontalLayout MenuButtons()
+    private HorizontalLayout menuButtons()
     {
-        //display buttons side by side
-        HorizontalLayout buttonsLayout = new HorizontalLayout();
-        buttonsLayout.add(submitButton());
-        buttonsLayout.add(backButton());
-
-        return buttonsLayout;
+        HorizontalLayout theMenuButtons = new HorizontalLayout();
+        theMenuButtons.add(submitButton());
+        theMenuButtons.add(backButton());
+        return theMenuButtons;
     }
 
     private TextField descriptionField()
@@ -95,6 +98,12 @@ public class AddMenu extends VerticalLayout {
         submitButton.addClickListener(event ->
         {
             myToDoRepo.save(toDoItem.DTOtoToDoItem());
+            List<ToDoItem> theList = myToDoRepo.findAll(Sort.by("priority").ascending());
+
+            if (!theList.isEmpty())
+            {
+                myList.setItems(theList);
+            }
         });
 
         return submitButton;

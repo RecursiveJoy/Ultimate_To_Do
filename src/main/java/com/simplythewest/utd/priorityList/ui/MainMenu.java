@@ -7,13 +7,11 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 public class MainMenu extends HorizontalLayout{
 
-    private final ToDoItemRepository myToDoRepo;
+    ToDoItemRepository myRepo;
 
-
-    MainMenu(ToDoItemRepository otherToDoRepo)
+    MainMenu(ToDoItemRepository otherToDoItemRepo)
     {
-        myToDoRepo = otherToDoRepo;
-
+        myRepo = otherToDoItemRepo;
         add(addButton());
         add(deleteButton());
         add(clearButton());
@@ -54,7 +52,9 @@ public class MainMenu extends HorizontalLayout{
 
         clearButton.addClickListener(
             clickEvent ->
-                myToDoRepo.deleteAll());
+            {
+                myRepo.deleteAll();
+            });
 
         return clearButton;
     }

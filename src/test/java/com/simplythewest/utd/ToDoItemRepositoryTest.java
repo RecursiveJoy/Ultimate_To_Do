@@ -17,12 +17,12 @@ import static org.assertj.core.api.Assertions.*;
 
 class ToDoItemRepositoryTest {
 
-    @Autowired
-    ToDoItemRepository todorepo1;
+    private ToDoItemRepository todorepo1;
 
     @Test
-    void createThenSave()
+    void createThenSave(ToDoItemRepository newRepo)
     {
+        todorepo1 = newRepo;
         todorepo1.save(new ToDoItem("first", 0));
         todorepo1.save(new ToDoItem("second", 1));
         todorepo1.save(new ToDoItem("third", 2));

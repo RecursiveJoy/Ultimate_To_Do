@@ -6,22 +6,30 @@ import com.simplythewest.utd.priorityList.models.ToDoItemRepository;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 @Route("")
 public class MainView extends VerticalLayout {
 
     private ToDoItemRepository myToDoRepo;
+    private Grid<ToDoItem> myList;
     private MainMenu mainMenu;
-    private ListManager listManager;
 
     public MainView(ToDoItemRepository otherToDoRepo)
     {
         myToDoRepo = otherToDoRepo;
-        listManager = new ListManager(myToDoRepo);
-        mainMenu = new MainMenu(myToDoRepo);
+        mainMenu = new MainMenu(otherToDoRepo);
+        myList = new Grid<ToDoItem>();
 
-        add(listManager.getGrid());
+        List theList = otherToDoRepo.findAll(Sort.by("priority").ascending());
 
+        if (!theList.isEmpty())
+        {
+            myList.setItems(theList);
+        }
+        add(myList);
         add(mainMenu);
     }
 
