@@ -3,15 +3,14 @@ package com.simplythewest.utd.priorityList.ui;
 import com.simplythewest.utd.priorityList.models.ToDoItemRepository;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import org.springframework.stereotype.Component;
 
 public class MainMenu extends HorizontalLayout{
 
-    ToDoItemRepository myRepo;
+    private final ToDoItemRepository myToDoRepo;
 
     MainMenu(ToDoItemRepository otherToDoItemRepo)
     {
-        myRepo = otherToDoItemRepo;
+        myToDoRepo = otherToDoItemRepo;
         add(addButton());
         add(deleteButton());
         add(clearButton());
@@ -53,8 +52,8 @@ public class MainMenu extends HorizontalLayout{
         clearButton.addClickListener(
             clickEvent ->
             {
-                myRepo.deleteAllByCompletedStatus(false);
-                myRepo.deleteAllByCompletedStatus(true);
+                myToDoRepo.deleteAllByCompletedStatus(false);
+                myToDoRepo.deleteAllByCompletedStatus(true);
             });
 
         return clearButton;
