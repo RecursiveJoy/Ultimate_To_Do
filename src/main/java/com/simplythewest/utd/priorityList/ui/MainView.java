@@ -1,7 +1,7 @@
 package com.simplythewest.utd.priorityList.ui;
 
-import com.simplythewest.utd.priorityList.models.ToDoItem;
-import com.simplythewest.utd.priorityList.models.ToDoItemRepository;
+import com.simplythewest.utd.priorityList.model.ToDoItem;
+import com.simplythewest.utd.priorityList.model.ToDoItemRepository;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -25,10 +25,7 @@ public class MainView extends VerticalLayout {
         List<ToDoItem> theList;
         theList = otherToDoRepo.findAll(Sort.by("priority").ascending());
 
-        if (!theList.isEmpty())
-        {
-            myList.setItems(theList);
-        }
+        myList.setItems(theList);
 
         add(myList);
         add(mainMenu);

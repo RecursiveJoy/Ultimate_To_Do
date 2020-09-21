@@ -1,4 +1,4 @@
-package com.simplythewest.utd.priorityList.models;
+package com.simplythewest.utd.priorityList.model;
 
 import java.util.List;
 
