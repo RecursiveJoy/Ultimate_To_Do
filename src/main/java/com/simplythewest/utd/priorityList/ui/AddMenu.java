@@ -1,8 +1,8 @@
 package com.simplythewest.utd.priorityList.ui;
 
-import com.simplythewest.utd.priorityList.models.ToDoDTO;
-import com.simplythewest.utd.priorityList.models.ToDoItem;
-import com.simplythewest.utd.priorityList.models.ToDoItemRepository;
+import com.simplythewest.utd.priorityList.model.ToDoDTO;
+import com.simplythewest.utd.priorityList.model.ToDoItem;
+import com.simplythewest.utd.priorityList.model.ToDoItemRepository;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;

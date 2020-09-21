@@ -1,4 +1,4 @@
-package com.simplythewest.utd.priorityList.models;
+package com.simplythewest.utd.priorityList.model;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ public interface ToDoItemRepository extends CrudRepository<ToDoItem, Long>{
     //transactional annotation fixes following error.
     //https://stackoverflow.com/questions/32269192/spring-no-entitymanager-with-actual-transaction-available-for-current-thread
     @Transactional
+    //@Modifying
     void deleteAllByCompletedStatus(boolean completedStatus);
 
     @Modifying

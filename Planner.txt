@@ -1,0 +1,170 @@
+------------------------------------------------------------------------
+PLANNER
+------------------------------------------------------------------------
+Planner has a priorityList
+Planner has a TabMenu at the top of the view.
+------------------------------------------------------------------------
+PRIORITYLIST
+------------------------------------------------------------------------
+priorityList has a Grid of ToDoItems
+priorityList has an AddView
+priorityList has a MainMenuView
+priorityList has a DeleteView
+priorityList has an EditView
+priorityList has a Clear method
+------------------------------------------------------------------------
+PRIORITYLIST: ADD VIEW
+------------------------------------------------------------------------
+AddView has a Description Field
+AddView has a Priority Selection Radio Button Group
+AddView has a Submit Button
+AddView has a Grid of ToDoItems
+AddView has a Back Button
+AddView has a ToDoDTO
+------------------------------------------------------------------------
+The Grid displays a priority-sorted list of the to_do_list rows.
+
+The Description Field listens for a value change and sets ToDoDTO's description
+equal to the new value.
+
+The Priority Selection Radio Button Group listens for a value change and sets
+ToDoDTO's priority value = to the corresponding numerical value. This is a derived value
+so it should be a method.
+
+The Submit Button tells the ToDoDTO to go ahead and create the new ToDoItem
+and add it to the database. The Grid should also update with the new value at
+this time.
+
+The Grid of ToDoItems should display all ToDoItems in the database in priority-
+sorted order. It should refresh when an item is added, removed, updated, or
+if the list is cleared.
+
+The Back Button navigates the user to the MainMenuView.
+
+The ToDoDTO stores the user-entered values until Submit is clicked.
+The ToDoDTO generates a ToDoItem and adds it to the database.
+------------------------------------------------------------------------
+PRIORITYLIST: MAIN MENU VIEW
+------------------------------------------------------------------------
+MainMenuView has a Grid of ToDoItems
+MainMenuView has a button for Add menu
+MainMenuView has a button for Update menu
+MainMenuView has a button for Delete menu
+MainMenuView has a button for ClearList
+------------------------------------------------------------------------
+The Grid displays a priority-sorted list of the to_do_list rows.
+
+The Add button navigates the user to the AddView.
+
+The Update button navigates the user to the EditView.
+
+The Delete button navigates the user to the DeleteView.
+
+The Clear button clears the table. It also refreshes the grid.
+------------------------------------------------------------------------
+PRIORITYLIST: DELETE MENU VIEW
+------------------------------------------------------------------------
+DeleteView has a Grid of selectable ToDoItems
+DeleteView has a Delete Button that deletes the selected item.
+DeleteView has a back button to navigate back to the MainMenuView.
+------------------------------------------------------------------------
+The Grid displays a priority-sorted list of the to_do_list rows.
+
+The Grid listens for a selection of a ToDoItem. When an item is selected,
+the ToDoDTO populates with the data of that ToDoItem.
+
+The Delete Button listens for a click. When the button is clicked, the ToDoDTO
+deletes the matching ToDoItem from the database. It also refreshes the grid.
+
+The Back button navigates the user back to the Main Menu View.
+------------------------------------------------------------------------
+PRIORITYLIST: EditView
+------------------------------------------------------------------------
+EditView has a Grid of selectable ToDoItems.
+EditView has an Edit Button.
+EditView has a description field.
+EditView has a Priority Selection Radio Button Group.
+EditView has a submit button.
+EditView has a back button.
+EditView has a ToDoDTO called "selection".
+EditView has a ToDoDTO called "updatedItem".
+------------------------------------------------------------------------
+The Grid of ToDoItems displays a priority-sorted list of rows from the to_do_list table.
+
+The Grid of ToDoItems listens for a selection. The values of the selected Item are placed
+in "selection".
+
+The Edit Button populates the description field with the description of the selected item.
+The Edit Button populates the priority button group with the priority value of the selected item.
+
+The Description Field listens for a change in value. If the value is changed, the
+"updatedItem"s description is set to the new value.
+
+The Priority Button Group listens for a change in value. If the value is changed,
+the ToDoDTO's description is set to the new value.
+
+The Submit Button listens for a click. It causes selection to return the ToDoItem
+in the database that matches 'Selection's attributes.
+ToDoDTO updatedItem then updates that ToDoItem in the database.
+The Grid list is then updated.
+
+The Back Button navigates the user back to the Main Menu.
+------------------------------------------------------------------------
+PRIORITYLIST: The Grid
+------------------------------------------------------------------------
+The Grid of ToDoItems displays a Description Column.
+The Grid of ToDoItems displays a Priority Column.
+The Grid of ToDoItems displays a timestamp column.
+The Grid of ToDoItems displays a priority-sorted List of ToDOItems.
+The Grid of ToDoItems connects to a Database called to_do_list.
+The Grid of ToDoItems is the same Grid across all menu views.
+------------------------------------------------------------------------
+The Grid displays the list of ToDoItems in the database to_do_list. They
+are sorted by priority value ASC.
+
+The description column displays the full text of the item's description.
+
+The Priority column displays "high", "medium", or "low" priority levels.
+
+The timestamp column displays the time created in a pretty format.
+
+The Grid connects to a database called to_do_list via a ToDoItemRepository object
+called myToDoItemRepo.
+------------------------------------------------------------------------
+PRIORITYLIST: The ToDoDTO
+------------------------------------------------------------------------
+The ToDoDTO tracks the item's description.
+The ToDoDTO tracks the item's priority value.
+The ToDoDTO tracks the item's ID.
+The ToDoDTO generates a ToDoItem based on its current field values.
+The ToDoDTO adds the new ToDoItem to the Database
+The ToDoDTO sets the fields for a selected item in the database.
+The ToDoDTO tracks the item's completed status.
+The ToDoDTO tracks the item's timestamp.
+------------------------------------------------------------------------
+the item's description is represented by a String 'description'.
+
+the item's priorityValue is derived from a method that converts a String
+'priorityString' to a corresponding numerical value (1, 2, 3).
+
+the item's ID is randomly generated and assigned upon it's creation.
+it is final private.
+
+the method toDoDTOtoToDoITem returns a ToDoItem with matching fields.
+
+the method addToDatabase adds the ToDoItem returned by the previous method to
+the database to_do_list via the repo.
+
+the method updateItem sets the fields of the toDoItem in the database that
+matches 'selection' to it's current field values using the repo.
+
+the item's completed status is represented by a field called 'completed'
+that is a boolean value.
+
+the item's completed status is changed when an item is clicked on the main menu.
+the Grid is then updated.
+
+the item's timestamp is represented by a ZonedDateandTime and is displayed in a
+friendly format: Tuesday Aug 09 at 12:34PM. The format is produced using a method
+that formats the raw ZonedDateandTime.
+------------------------------------------------------------------------
