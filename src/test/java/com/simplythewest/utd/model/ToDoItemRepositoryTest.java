@@ -20,14 +20,16 @@ class ToDoItemRepositoryTest {
     private ToDoItemRepository todoRep;
 
     @Test
-    void createThenSave() {
+    void createThenSave()
+    {
         todoRep.save( new ToDoItem( "first", 0 ) );
         todoRep.save( new ToDoItem( "second", 1 ) );
         todoRep.save( new ToDoItem( "third", 2 ) );
         todoRep.save( new ToDoItem( "fourth", 3 ) );
         List<ToDoItem> ordered =
-            todoRep.findAll( Sort.by( Sort.Direction.DESC, "priority" ) );
+            todoRep.findAll( Sort.by( Sort.Direction.ASC, "priority" ) );
         assertThat( ordered.get( 2 ) ).isNotNull();
     }
+
 
 }

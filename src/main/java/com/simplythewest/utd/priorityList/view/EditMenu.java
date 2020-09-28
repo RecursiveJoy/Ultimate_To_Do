@@ -1,4 +1,4 @@
-package com.simplythewest.utd.priorityList.ui;
+package com.simplythewest.utd.priorityList.view;
 
 import com.simplythewest.utd.priorityList.model.ToDoDTO;
 import com.simplythewest.utd.priorityList.model.ToDoItemRepository;

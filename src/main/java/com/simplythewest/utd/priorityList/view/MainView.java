@@ -1,10 +1,13 @@
-package com.simplythewest.utd.priorityList.ui;
+package com.simplythewest.utd.priorityList.view;
 
 import com.simplythewest.utd.priorityList.model.ToDoItem;
 import com.simplythewest.utd.priorityList.model.ToDoItemRepository;
+import com.simplythewest.utd.priorityList.viewModel.MainViewViewModel;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
@@ -12,20 +15,17 @@ import java.util.List;
 @Route("")
 public class MainView extends VerticalLayout {
 
-    private ToDoItemRepository myToDoRepo;
+    @Autowired
+    private MainViewViewModel myMVVM;
     private Grid<ToDoItem> myList;
     private MainMenu mainMenu;
 
-    public MainView(ToDoItemRepository otherToDoRepo)
+    public MainView()
     {
-        myToDoRepo = otherToDoRepo;
-        mainMenu = new MainMenu(otherToDoRepo);
-        myList = new Grid<ToDoItem>();
+        mainMenu = new MainMenu(myMVVM);
+        myList = new Grid<>();
 
-        List<ToDoItem> theList;
-        theList = otherToDoRepo.findAll(Sort.by("priority").ascending());
-
-        myList.setItems(theList);
+        myList.setItems(myMVVM.findAll());
 
         add(myList);
         add(mainMenu);

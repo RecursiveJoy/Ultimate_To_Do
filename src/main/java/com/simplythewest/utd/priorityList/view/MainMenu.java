@@ -1,23 +1,24 @@
-package com.simplythewest.utd.priorityList.ui;
+package com.simplythewest.utd.priorityList.view;
 
-import com.simplythewest.utd.priorityList.model.ToDoItemRepository;
+import com.simplythewest.utd.priorityList.viewModel.MainViewViewModel;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 public class MainMenu extends HorizontalLayout{
 
-    private final ToDoItemRepository myToDoRepo;
+    private final MainViewViewModel myMVVM;
 
-    MainMenu(ToDoItemRepository otherToDoItemRepo)
+    MainMenu(MainViewViewModel myMVVM)
     {
-        myToDoRepo = otherToDoItemRepo;
+        this.myMVVM = myMVVM;
         add(addButton());
         add(deleteButton());
         add(clearButton());
         add(editButton());
     }
 
-    private Button addButton()
+
+    public Button addButton()
     {
         Button addButton = new Button("Add");
 
@@ -45,16 +46,14 @@ public class MainMenu extends HorizontalLayout{
         return deleteButton;
     }
 
-    private Button clearButton()
+    public Button clearButton()
     {
         Button clearButton = new Button("Clear");
 
         clearButton.addClickListener(
             clickEvent ->
-            {
-                myToDoRepo.deleteAllByCompletedStatus(false);
-                myToDoRepo.deleteAllByCompletedStatus(true);
-            });
+                myMVVM.clear()
+            );
 
         return clearButton;
     }

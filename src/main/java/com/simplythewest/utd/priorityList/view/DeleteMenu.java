@@ -1,4 +1,4 @@
-package com.simplythewest.utd.priorityList.ui;
+package com.simplythewest.utd.priorityList.view;
 
 import com.simplythewest.utd.priorityList.model.ToDoItemRepository;
 import com.vaadin.flow.component.button.Button;
